@@ -24,12 +24,12 @@ export default function SignTaxiHome() {
 
   const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+ useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  }, 5000);
+  return () => clearInterval(interval);
+}, [slides.length]);
 
   /* ---------------- BOOKING FORM ---------------- */
 

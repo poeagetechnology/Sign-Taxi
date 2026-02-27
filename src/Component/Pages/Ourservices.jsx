@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Maps from '../../Aset/Maps.png'
-import SignLogo from "../../Aset/Sign Taxi.png";
+import Maps from '../../Aset/Maps.png';
 
 export default function Ourservices() {
   const citiesLeft = [
