@@ -3,11 +3,22 @@ import SignLogo from "../Aset/Sign Taxi.png";
 import Skyline from "../Aset/Skyline.png";
 
 export default function Footer() {
-
   const cities = [
-    "Coimbatore","Chennai","Trichy","Madurai","Erode",
-    "Salem","Tirupur","Vellore","Karur","Tirunelveli",
-    "Hosur","Pollachi","Thanjavur","Dindigul","Villupuram"
+    "Coimbatore",
+    "Chennai",
+    "Trichy",
+    "Madurai",
+    "Erode",
+    "Salem",
+    "Tirupur",
+    "Vellore",
+    "Karur",
+    "Tirunelveli",
+    "Hosur",
+    "Pollachi",
+    "Thanjavur",
+    "Dindigul",
+    "Villupuram",
   ];
 
   const whatsappMessage = `
@@ -20,53 +31,47 @@ We are happy to assist you.
 
   return (
     <footer className="relative bg-white dark:bg-white text-gray-200 dark:text-black  transition-colors duration-500 overflow-hidden">
-
       {/* Animated Skyline */}
       <div className="w-full overflow-hidden border-b border-gray-200 dark:border-black">
         <div
           className="flex gap-20 w-max"
           style={{ animation: "skyline 40s linear infinite" }}
         >
-          <img
-            src={Skyline}
-            className="h-20"
-            alt="skyline"
-          />
-          <img
-            src={Skyline}
-            className="h-20"
-            alt="skyline"
-          />
+          <img src={Skyline} className="h-20" alt="skyline" />
+          <img src={Skyline} className="h-20" alt="skyline" />
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-12">
-
         {/* Brand */}
         <div>
           <img src={SignLogo} alt="Sign Taxi" className="h-12 mb-6" />
           <p className="text-sm leading-relaxed">
-            Premium, reliable and well-maintained taxi services across Tamil Nadu.
-            Experience comfort and safety every ride.
+            Premium, reliable and well-maintained taxi services across Tamil
+            Nadu. Experience comfort and safety every ride.
           </p>
         </div>
 
         {/* Trips */}
         <div>
-          <h4 className="font-semibold mb-4 text-gray-900 dark:text-blue-500">Trips</h4>
+          <h4 className="font-semibold mb-4 text-gray-900 dark:text-blue-500">
+            Trips
+          </h4>
           <ul className="space-y-2 text-sm">
-            {["Oneway","Round Trip","Hourly Rental","Airport Taxi"]
-              .map((item,i)=>(
-              <li key={i}
-                className="relative w-fit cursor-pointer 
+            {["Oneway", "Round Trip", "Hourly Rental", "Airport Taxi"].map(
+              (item, i) => (
+                <li
+                  key={i}
+                  className="relative w-fit cursor-pointer 
                 after:absolute after:left-0 after:-bottom-1 
                 after:h-[2px] after:w-0 after:bg-gradient-to-r 
                 after:from-orange-500 after:to-red-500 
                 hover:after:w-full after:transition-all"
-              >
-                {item}
-              </li>
-            ))}
+                >
+                  {item}
+                </li>
+              ),
+            )}
           </ul>
         </div>
 
@@ -81,7 +86,7 @@ We are happy to assist you.
               className="flex gap-8 w-max text-sm"
               style={{ animation: "marquee 25s linear infinite" }}
             >
-              {[...cities, ...cities].map((city,i)=>(
+              {[...cities, ...cities].map((city, i) => (
                 <span key={i}>{city}</span>
               ))}
             </div>
@@ -95,40 +100,47 @@ We are happy to assist you.
           </h4>
 
           <div className="space-y-3">
-            <a href="#">
+            <button
+              type="button"
+              aria-label="Download from App Store"
+              className="bg-transparent border-none p-0 cursor-pointer hover:opacity-80 transition"
+            >
               <img
                 src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                 className="h-10"
-                alt="appstore"
+                alt="Download from App Store"
               />
-            </a>
+            </button>
 
-            <a href="#">
+            <button
+              type="button"
+              aria-label="Download from Google Play Store"
+              className="bg-transparent border-none p-0 cursor-pointer hover:opacity-80 transition"
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                 className="h-10"
-                alt="playstore"
+                alt="Download from Google Play Store"
               />
-            </a>
+            </button>
           </div>
         </div>
-
       </div>
 
       {/* Bottom */}
       <div className="border-t border-gray-200 dark:border-gray-800 py-6 text-center text-sm">
-
-        <p>
-          © {new Date().getFullYear()} Sign Taxi. All rights reserved.
-        </p>
+        <p>© {new Date().getFullYear()} Sign Taxi. All rights reserved.</p>
 
         <p className="mt-2">
           Crafted with ❤️ by{" "}
-        <a href="https://poeagetechnology.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://poeagetechnology.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             Poeage
           </a>
         </p>
-
       </div>
 
       {/* WhatsApp Floating */}
@@ -157,7 +169,6 @@ We are happy to assist you.
           }
         `}
       </style>
-
     </footer>
   );
 }
