@@ -124,12 +124,7 @@ We are happy to assist you.
 
         <p className="mt-2">
           Crafted with ❤️ by{" "}
-          <a
-            href="https://poeagetechnology.com"
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-blue-500 hover:text-blue-600 transition"
-          >
+        <a href="https://poeagetechnology.com" target="_blank" rel="noreferrer">
             Poeage
           </a>
         </p>
