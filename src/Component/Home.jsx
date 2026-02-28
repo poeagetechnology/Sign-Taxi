@@ -54,7 +54,7 @@ export default function SignTaxiHome() {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   /* ---------------- BOOKING FORM ---------------- */
 
