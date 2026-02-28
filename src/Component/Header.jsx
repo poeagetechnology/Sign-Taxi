@@ -65,7 +65,6 @@ export default function AuthHeader() {
     <>
       <header className="w-full sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
           {/* Logo */}
           <img src={Logo} alt="SignTaxi" className="h-12 w-auto" />
 
@@ -88,9 +87,7 @@ export default function AuthHeader() {
               </div>
             ))}
 
-            <button className="hover:text-red-600">
-              Become a Partner
-            </button>
+            <button className="hover:text-red-600">Become a Partner</button>
 
             {/* LOGIN / PROFILE */}
             {!user ? (
@@ -153,11 +150,7 @@ export default function AuthHeader() {
               </div>
 
               <div className="flex justify-end">
-                <img
-                  src={CarImage}
-                  alt="Car"
-                  className="w-96 object-contain"
-                />
+                <img src={CarImage} alt="Car" className="w-96 object-contain" />
               </div>
             </div>
           </div>
@@ -168,9 +161,7 @@ export default function AuthHeader() {
       {showLogin && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center">
-            <h2 className="text-2xl font-bold mb-6">
-              Login to Sign Taxi
-            </h2>
+            <h2 className="text-2xl font-bold mb-6">Login to Sign Taxi</h2>
 
             <button
               onClick={handleLogin}
@@ -196,9 +187,7 @@ export default function AuthHeader() {
             <h2 className="text-2xl font-bold text-green-600">
               Welcome to Sign Taxi 🚖
             </h2>
-            <p className="mt-2 text-gray-600">
-              Login Successful!
-            </p>
+            <p className="mt-2 text-gray-600">Login Successful!</p>
           </div>
         </div>
       )}

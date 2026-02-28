@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import SignLogo from "../Aset/Sign Taxi.png";
 import Car1 from "../Aset/car1.png";
 import Car2 from "../Aset/car2.png";
@@ -11,15 +12,39 @@ import Cabtypes from "./Pages/Cabtypes";
 import Ourservices from "./Pages/Ourservices";
 
 export default function SignTaxiHome() {
-
   /* ---------------- SLIDER ---------------- */
 
   const slides = [
-    { title: "24/7 Direct Customer Support", subtitle: "Premium Toyota Innova Crysta", image: Car1, bg: "from-red-600 to-red-500" },
-    { title: "No Ride Cancellations", subtitle: "Luxury Hyundai Verna", image: Car2, bg: "from-black via-gray-900 to-black" },
-    { title: "Corporate & Airport Transfers", subtitle: "Elite Kia Carens", image: Car3, bg: "from-blue-700 to-indigo-600" },
-    { title: "Affordable City Rides", subtitle: "Swift Dzire Sedan", image: Car4, bg: "from-purple-700 to-pink-600" },
-    { title: "Outstation Premium Trips", subtitle: "Mahindra XUV700", image: Car5, bg: "from-yellow-500 to-orange-500" },
+    {
+      title: "24/7 Direct Customer Support",
+      subtitle: "Premium Toyota Innova Crysta",
+      image: Car1,
+      bg: "from-red-600 to-red-500",
+    },
+    {
+      title: "No Ride Cancellations",
+      subtitle: "Luxury Hyundai Verna",
+      image: Car2,
+      bg: "from-black via-gray-900 to-black",
+    },
+    {
+      title: "Corporate & Airport Transfers",
+      subtitle: "Elite Kia Carens",
+      image: Car3,
+      bg: "from-blue-700 to-indigo-600",
+    },
+    {
+      title: "Affordable City Rides",
+      subtitle: "Swift Dzire Sedan",
+      image: Car4,
+      bg: "from-purple-700 to-pink-600",
+    },
+    {
+      title: "Outstation Premium Trips",
+      subtitle: "Mahindra XUV700",
+      image: Car5,
+      bg: "from-yellow-500 to-orange-500",
+    },
   ];
 
   const [current, setCurrent] = useState(0);
@@ -42,7 +67,7 @@ export default function SignTaxiHome() {
     to: "",
     date: today,
     mobile: "",
-    email: ""
+    email: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -90,9 +115,21 @@ Email: ${formData.email}
 
   return (
     <main className="w-full overflow-hidden">
+      <Helmet>
+        <title>
+          Sign Taxi – Best Taxi Service in Coimbatore | 24/7 Call Taxi
+        </title>
+        <meta
+          name="description"
+          content="Book affordable cabs with Sign Taxi Coimbatore. 24/7 service for airport transfers, outstation trips, and local rides. Reliable, safe, and professional drivers."
+        />
+        <link rel="canonical" href="https://signtaxi.co.in/" />
+      </Helmet>
 
       {/* HERO SECTION */}
-      <section className={`relative w-full h-[90vh] bg-gradient-to-r ${slides[current].bg} text-white`}>
+      <section
+        className={`relative w-full h-[90vh] bg-gradient-to-r ${slides[current].bg} text-white`}
+      >
         <div className="max-w-7xl mx-auto px-6 h-full grid md:grid-cols-2 items-center">
           <div>
             <img src={SignLogo} alt="Sign Taxi" className="h-16 mb-6" />
@@ -120,7 +157,6 @@ Email: ${formData.email}
 
       {/* BOOKING SECTION */}
       <section className="max-w-7xl mx-auto px-6 -mt-20 relative z-10">
-
         <div className="flex gap-4 mb-6">
           {["Oneway", "Outstation", "Rental"].map((type) => (
             <button
@@ -139,7 +175,6 @@ Email: ${formData.email}
           onSubmit={handleSubmit}
           className="bg-gray-100 rounded-3xl shadow-2xl p-8 grid md:grid-cols-5 gap-4"
         >
-
           <div>
             <input
               value={formData.from}
@@ -149,15 +184,15 @@ Email: ${formData.email}
               placeholder="Pickup Location"
               className="w-full px-4 py-3 rounded-xl border"
             />
-            {errors.from && <p className="text-red-500 text-xs">{errors.from}</p>}
+            {errors.from && (
+              <p className="text-red-500 text-xs">{errors.from}</p>
+            )}
           </div>
 
           <div>
             <input
               value={formData.to}
-              onChange={(e) =>
-                setFormData({ ...formData, to: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, to: e.target.value })}
               placeholder="Drop Location"
               className="w-full px-4 py-3 rounded-xl border"
             />
@@ -173,7 +208,9 @@ Email: ${formData.email}
               }
               className="w-full px-4 py-3 rounded-xl border"
             />
-            {errors.date && <p className="text-red-500 text-xs">{errors.date}</p>}
+            {errors.date && (
+              <p className="text-red-500 text-xs">{errors.date}</p>
+            )}
           </div>
 
           <div>
@@ -184,7 +221,9 @@ Email: ${formData.email}
               }
               className="w-full px-4 py-3 rounded-xl border"
             />
-            {errors.mobile && <p className="text-red-500 text-xs">{errors.mobile}</p>}
+            {errors.mobile && (
+              <p className="text-red-500 text-xs">{errors.mobile}</p>
+            )}
           </div>
 
           <div>
@@ -195,7 +234,9 @@ Email: ${formData.email}
               }
               className="w-full px-4 py-3 rounded-xl border"
             />
-            {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email}</p>
+            )}
           </div>
 
           <div className="md:col-span-5 flex justify-center mt-4">
@@ -206,13 +247,11 @@ Email: ${formData.email}
               Book Now
             </button>
           </div>
-
         </form>
 
         <Triptypes />
         <Cabtypes />
         <Ourservices />
-
       </section>
     </main>
   );

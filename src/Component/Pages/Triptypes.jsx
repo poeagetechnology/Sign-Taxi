@@ -1,47 +1,42 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 export default function TripTypes() {
   const trips = [
     {
       title: "Oneway Trip",
-      image:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
       description:
         "Book a single destination ride with transparent pricing and zero hidden charges. Perfect for airport drops and intercity travel.",
     },
     {
       title: "Round Trip",
-      image:
-        "https://images.unsplash.com/photo-1493238792000-8113da705763",
+      image: "https://images.unsplash.com/photo-1493238792000-8113da705763",
       description:
         "Travel to your destination and return comfortably with flexible waiting time and affordable packages.",
     },
     {
       title: "Airport Transfer",
-      image:
-        "https://images.unsplash.com/photo-1529070538774-1843cb3265df",
+      image: "https://images.unsplash.com/photo-1529070538774-1843cb3265df",
       description:
         "On-time airport pickups and drops with professional drivers and luggage assistance.",
     },
     {
       title: "Hourly Rental",
-      image:
-        "https://images.unsplash.com/photo-1502877338535-766e1452684a",
+      image: "https://images.unsplash.com/photo-1502877338535-766e1452684a",
       description:
         "Book a cab for multiple hours and travel anywhere within the city without worrying about distance limits.",
     },
     {
       title: "Corporate Travel",
-      image:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
+      image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70",
       description:
         "Premium executive rides for business meetings, events, and company travel requirements.",
     },
     {
       title: "Outstation Trip",
-      image:
-        "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+      image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
       description:
         "Enjoy comfortable long-distance travel across cities with well-maintained SIGNTAXI vehicles. Ideal for family trips, pilgrimages, weekend getaways, and business travel with professional drivers and fixed upfront pricing.",
     },
@@ -51,6 +46,14 @@ export default function TripTypes() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
+      <Helmet>
+        <title>Trip Types - One Way, Round Trip & Outstation | Sign Taxi</title>
+        <meta
+          name="description"
+          content="Choose from our wide range of trip types. We offer one-way drops, round trips, airport transfers, and outstation taxi services from Coimbatore."
+        />
+        <link rel="canonical" href="https://signtaxi.co.in/trip" />
+      </Helmet>
       <h2 className="text-4xl font-bold text-center mb-12">
         Explore Trip Types
       </h2>

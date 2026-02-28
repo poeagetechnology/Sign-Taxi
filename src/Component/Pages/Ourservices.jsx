@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Maps from '../../Aset/Maps.png';
+import { Helmet } from "react-helmet-async";
+import Maps from "../../Aset/Maps.png";
 
 export default function Ourservices() {
   const citiesLeft = [
@@ -27,8 +28,17 @@ export default function Ourservices() {
 
   return (
     <section className="py-24 bg-white overflow-hidden">
+      <Helmet>
+        <title>
+          Our Services & Coverage - Coimbatore, Chennai, Madurai | Sign Taxi
+        </title>
+        <meta
+          name="description"
+          content="Sign Taxi provides taxi services across major cities in Tamil Nadu including Coimbatore, Chennai, Trichy, Madurai, and more. Reliable intercity and local travel."
+        />
+        <link rel="canonical" href="https://signtaxi.co.in/services" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-
         {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
@@ -86,10 +96,8 @@ export default function Ourservices() {
           {/* Glow Effect */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="absolute inset-0 bg-orange-500 blur-2xl opacity-40 rounded-full animate-pulse"></div>
-
           </div>
         </motion.div>
-
       </div>
     </section>
   );

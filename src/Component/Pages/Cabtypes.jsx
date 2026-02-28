@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 import Car1 from "../../Aset/car1.png";
 import Car2 from "../../Aset/car2.png";
@@ -18,7 +19,8 @@ export default function Cabtypes() {
       desc: "Business Class Ride",
       pricePerKm: 18,
       image: Car1,
-      details: "Premium AC sedan perfect for corporate travel and airport transfers.",
+      details:
+        "Premium AC sedan perfect for corporate travel and airport transfers.",
     },
     {
       title: "Mini",
@@ -69,13 +71,21 @@ Please confirm booking.
 
     window.open(
       `https://wa.me/918300399599?text=${encodeURIComponent(message)}`,
-      "_blank"
+      "_blank",
     );
     setSelected(null);
   };
 
   return (
     <section className="py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
+      <Helmet>
+        <title>Our Fleet - Sedan, SUV & Premium Cabs | Sign Taxi</title>
+        <meta
+          name="description"
+          content="Choose from our wide fleet of vehicles including Sedan, SUV, Toyota Innova, and luxury cars. Premium taxi services in Coimbatore with best-in-class comfort."
+        />
+        <link rel="canonical" href="https://signtaxi.co.in/cabs" />
+      </Helmet>
 
       {/* Heading */}
       <div className="max-w-7xl mx-auto px-6 text-center mb-14">
@@ -210,7 +220,6 @@ Please confirm booking.
           }
         `}
       </style>
-
     </section>
   );
 }
