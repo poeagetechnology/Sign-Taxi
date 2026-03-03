@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 import Logo from "../Aset/Sign Taxi.png";
 import CarImage from "../Aset/car.png";
 
 export default function AuthHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const megaMenus = {
     Services: {
@@ -39,26 +41,14 @@ export default function AuthHeader() {
     },
   };
 
-  /* ---------------- LOGIN SIMULATION ---------------- */
-
-  const handleLogin = () => {
-    const fakeUser = {
-      name: "John Kumar",
-      email: "john@gmail.com",
-      photo: "https://i.pravatar.cc/150?img=3",
-    };
-
-    setUser(fakeUser);
-    setShowLogin(false);
-    setShowWelcome(true);
-
-    setTimeout(() => {
-      setShowWelcome(false);
-    }, 2000);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setDropdownOpen(false);
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -66,12 +56,22 @@ export default function AuthHeader() {
       <header className="w-full sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <img src={Logo} alt="SignTaxi" className="h-12 w-auto" />
+          <Link to="/">
+            <img
+              src={Logo}
+              alt="SignTaxi"
+              className="h-12 w-auto hover:opacity-80 transition"
+            />
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8 font-medium text-gray-800">
-            <button className="hover:text-red-600">Home</button>
-            <button className="hover:text-red-600">About Us</button>
+            <Link to="/" className="hover:text-red-600 transition">
+              Home
+            </Link>
+            <Link to="/services" className="hover:text-red-600 transition">
+              About Us
+            </Link>
 
             {Object.keys(megaMenus).map((menu) => (
               <div
@@ -80,41 +80,85 @@ export default function AuthHeader() {
                 onMouseEnter={() => setActiveMenu(menu)}
                 onMouseLeave={() => setActiveMenu(null)}
               >
-                <button className="flex items-center gap-1 hover:text-red-600">
+                <button className="flex items-center gap-1 hover:text-red-600 transition">
                   {menu}
                   <ChevronDown size={16} />
                 </button>
               </div>
             ))}
 
-            <button className="hover:text-red-600">Become a Partner</button>
+            <button className="hover:text-red-600 transition">
+              Become a Partner
+            </button>
 
             {/* LOGIN / PROFILE */}
             {!user ? (
-              <button
-                onClick={() => setShowLogin(true)}
-                className="ml-4 px-6 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 font-semibold"
-              >
-                Login
-              </button>
+              <div className="flex gap-3 ml-4">
+                <Link
+                  to="/login"
+                  className="px-6 py-2 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-6 py-2 rounded-full border-2 border-red-600 text-red-600 font-semibold hover:bg-red-50 transition"
+                >
+                  Sign Up
+                </Link>
+              </div>
             ) : (
-              <div className="relative group cursor-pointer">
-                <img
-                  src={user.photo}
-                  alt="profile"
-                  className="w-10 h-10 rounded-full"
-                />
+              <div className="relative ml-4">
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 hover:bg-red-200 transition"
+                >
+                  <User size={18} className="text-red-600" />
+                  <span className="text-red-600 font-semibold text-sm">
+                    {user.displayName}
+                  </span>
+                </button>
 
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden group-hover:block">
-                  <p className="font-semibold">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.email}</p>
-                  <button
-                    onClick={handleLogout}
-                    className="mt-3 text-red-600 text-sm"
-                  >
-                    Logout
-                  </button>
-                </div>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 border border-gray-200">
+                    <p className="font-semibold text-gray-900">
+                      {user.displayName}
+                    </p>
+                    <p className="text-sm text-gray-500 truncate">
+                      {user.email}
+                    </p>
+                    <hr className="my-3" />
+                    <Link
+                      to="/profile"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition text-sm"
+                    >
+                      My Profile
+                    </Link>
+                    <Link
+                      to="/rides"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition text-sm"
+                    >
+                      My Rides
+                    </Link>
+                    <Link
+                      to="/settings"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition text-sm"
+                    >
+                      Settings
+                    </Link>
+                    <hr className="my-3" />
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-red-600 hover:bg-red-50 rounded transition text-sm"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </nav>
@@ -156,41 +200,6 @@ export default function AuthHeader() {
           </div>
         )}
       </header>
-
-      {/* LOGIN MODAL */}
-      {showLogin && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center">
-            <h2 className="text-2xl font-bold mb-6">Login to Sign Taxi</h2>
-
-            <button
-              onClick={handleLogin}
-              className="w-full px-6 py-3 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700"
-            >
-              Continue with Google
-            </button>
-
-            <button
-              onClick={() => setShowLogin(false)}
-              className="mt-4 text-gray-500 text-sm"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* WELCOME POPUP */}
-      {showWelcome && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white px-10 py-8 rounded-2xl shadow-2xl text-center">
-            <h2 className="text-2xl font-bold text-green-600">
-              Welcome to Sign Taxi 🚖
-            </h2>
-            <p className="mt-2 text-gray-600">Login Successful!</p>
-          </div>
-        </div>
-      )}
     </>
   );
 }
