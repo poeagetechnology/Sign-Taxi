@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 export default function Profile() {
-  const { user, updateUserProfile: updateProfile } = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState("");

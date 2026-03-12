@@ -60,12 +60,6 @@ export default function Cabtypes() {
     },
   ];
 
-  const calculateFare = () => {
-    if (!distance || isNaN(distance)) return;
-    const total = distance * selected.pricePerKm;
-    setFare(total);
-  };
-
   const handleBook = () => {
     const message = `
 🚖 SIGN TAXI Booking

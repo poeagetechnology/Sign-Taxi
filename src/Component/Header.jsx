@@ -1,46 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../Aset/Sign Taxi.png";
-import CarImage from "../Aset/car.png";
 
 export default function AuthHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-
-  const megaMenus = {
-    Services: {
-      title: "Book a Ride",
-      items: [
-        "Oneway Trip",
-        "Round Trip",
-        "Hourly Rental",
-        "Airport Taxi",
-        "Corporate Travel",
-        "Bike Taxi",
-      ],
-    },
-    Cities: {
-      title: "Cities",
-      items: [
-        "Chennai",
-        "Coimbatore",
-        "Madurai",
-        "Salem",
-        "Trichy",
-        "Tirunelveli",
-        "Erode",
-        "Vellore",
-        "Tirupur",
-        "Thanjavur",
-      ],
-    },
-  };
 
   const handleLogout = async () => {
     try {
