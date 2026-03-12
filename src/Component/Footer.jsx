@@ -1,6 +1,7 @@
 import React from "react";
 import SignLogo from "../Aset/Sign Taxi.png";
 import Skyline from "../Aset/Skyline.png";
+import { FaPhoneAlt, FaWhatsapp, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
   const cities = [
@@ -93,36 +94,47 @@ We are happy to assist you.
           </div>
         </div>
 
-        {/* App Buttons */}
+        {/* Contact */}
         <div>
           <h4 className="font-semibold mb-4 text-gray-900 dark:text-blue-500">
-            Download App
+            Contact Us
           </h4>
 
-          <div className="space-y-3">
-            <button
-              type="button"
-              aria-label="Download from App Store"
-              className="bg-transparent border-none p-0 cursor-pointer hover:opacity-80 transition"
-            >
-              <img
-                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                className="h-10"
-                alt="Download from App Store"
-              />
-            </button>
+          <div className="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+            {/* Phone */}
+            <div className="flex items-start gap-3">
+              <FaPhoneAlt className="text-red-600 mt-1 flex-shrink-0" />
+              <a
+                href="tel:+918300399599"
+                className="hover:text-red-600 transition"
+              >
+                +91 83003 99599
+              </a>
+            </div>
 
-            <button
-              type="button"
-              aria-label="Download from Google Play Store"
-              className="bg-transparent border-none p-0 cursor-pointer hover:opacity-80 transition"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                className="h-10"
-                alt="Download from Google Play Store"
-              />
-            </button>
+            {/* WhatsApp */}
+            <div className="flex items-start gap-3">
+              <FaWhatsapp className="text-green-600 mt-1 flex-shrink-0" />
+              <a
+                href={`https://wa.me/918300399599?text=${encodeURIComponent(whatsappMessage)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-green-600 transition"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
+
+            {/* Address */}
+            <div className="flex items-start gap-3">
+              <FaMapMarkerAlt className="text-red-600 mt-1 flex-shrink-0" />
+              <p>
+                Annapoorani Hotel, 17/A1 <br />
+                Near Airport Service Road <br />
+                Civil Aerodrome Post, Sitra <br />
+                Coimbatore, Tamil Nadu 641014
+              </p>
+            </div>
           </div>
         </div>
       </div>

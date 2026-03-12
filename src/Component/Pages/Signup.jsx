@@ -10,9 +10,12 @@ import {
   Phone,
   AlertCircle,
   CheckCircle,
+  Car,
+  Users,
 } from "lucide-react";
 
 export default function Signup() {
+  const [role, setRole] = useState(null); // 'user' or 'owner'
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -30,6 +33,12 @@ export default function Signup() {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    if (!role) {
+      setError("Please select your role first");
+      return;
+    }
+
     setLoading(true);
 
     // Validation
@@ -82,7 +91,7 @@ export default function Signup() {
     }
 
     try {
-      await signup(email, password, displayName, phoneNumber);
+      await signup(email, password, displayName, phoneNumber, role);
       setSuccess("Account created successfully! Redirecting...");
       setTimeout(() => {
         navigate("/");
@@ -156,6 +165,43 @@ export default function Signup() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Role Selection */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
+                I am a...
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setRole("user")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
+                    role === "user"
+                      ? "border-red-600 bg-red-50 text-red-600 shadow-md"
+                      : "border-gray-100 bg-gray-50 text-gray-500 hover:bg-gray-100"
+                  }`}
+                >
+                  <Users className="w-6 h-6 mb-2" />
+                  <span className="text-xs font-bold uppercase tracking-wider">
+                    Passenger
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setRole("owner")}
+                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
+                    role === "owner"
+                      ? "border-red-600 bg-red-50 text-red-600 shadow-md"
+                      : "border-gray-100 bg-gray-50 text-gray-500 hover:bg-gray-100"
+                  }`}
+                >
+                  <Car className="w-6 h-6 mb-2" />
+                  <span className="text-xs font-bold uppercase tracking-wider">
+                    Taxi Owner
+                  </span>
+                </button>
+              </div>
+            </div>
+
             {/* Name Field */}
             <div>
               <label

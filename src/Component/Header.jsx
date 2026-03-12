@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Menu, X, ChevronDown, User, LogOut } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../Aset/Sign Taxi.png";
 import CarImage from "../Aset/car.png";
@@ -69,27 +70,12 @@ export default function AuthHeader() {
             <Link to="/" className="hover:text-red-600 transition">
               Home
             </Link>
-            <Link to="/services" className="hover:text-red-600 transition">
-              About Us
+            <Link to="/about" className="hover:text-red-600 transition">
+              About
             </Link>
-
-            {Object.keys(megaMenus).map((menu) => (
-              <div
-                key={menu}
-                className="relative"
-                onMouseEnter={() => setActiveMenu(menu)}
-                onMouseLeave={() => setActiveMenu(null)}
-              >
-                <button className="flex items-center gap-1 hover:text-red-600 transition">
-                  {menu}
-                  <ChevronDown size={16} />
-                </button>
-              </div>
-            ))}
-
-            <button className="hover:text-red-600 transition">
-              Become a Partner
-            </button>
+            <Link to="/services" className="hover:text-red-600 transition">
+              Services
+            </Link>
 
             {/* LOGIN / PROFILE */}
             {!user ? (
@@ -164,41 +150,143 @@ export default function AuthHeader() {
           </nav>
 
           {/* Mobile Toggle */}
-          <div className="lg:hidden">
-            <button onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X /> : <Menu />}
+          <div className="lg:hidden flex items-center gap-4">
+            {!user && (
+              <Link
+                to="/login"
+                className="px-4 py-2 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wider"
+              >
+                Login
+              </Link>
+            )}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-gray-800 hover:bg-gray-100 rounded-lg transition"
+            >
+              {mobileOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* MEGA MENU */}
-        {activeMenu && (
-          <div
-            className="absolute left-0 w-full bg-red-600 text-white shadow-2xl"
-            onMouseEnter={() => setActiveMenu(activeMenu)}
-            onMouseLeave={() => setActiveMenu(null)}
-          >
-            <div className="max-w-7xl mx-auto px-10 py-12 grid grid-cols-2 items-center">
-              <div>
-                <h2 className="text-4xl font-bold mb-8">
-                  {megaMenus[activeMenu].title}
-                </h2>
-
-                <div className="grid grid-cols-2 gap-6 text-lg">
-                  {megaMenus[activeMenu].items.map((item, i) => (
-                    <div key={i} className="hover:underline cursor-pointer">
-                      {item}
-                    </div>
-                  ))}
+        {/* MOBILE SIDE DRAWER */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileOpen(false)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] lg:hidden"
+              />
+              {/* Drawer Content */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed top-0 right-0 h-full w-[300px] bg-white z-[70] lg:hidden shadow-2xl flex flex-col"
+              >
+                <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+                  <img src={Logo} alt="Logo" className="h-8" />
+                  <button
+                    onClick={() => setMobileOpen(false)}
+                    className="p-2 text-gray-500 hover:text-red-600 transition"
+                  >
+                    <X size={24} />
+                  </button>
                 </div>
-              </div>
 
-              <div className="flex justify-end">
-                <img src={CarImage} alt="Car" className="w-96 object-contain" />
-              </div>
-            </div>
-          </div>
-        )}
+                <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                  {user && (
+                    <div className="mb-8 p-4 bg-red-50 rounded-2xl border border-red-100">
+                      <p className="text-xs font-black text-red-600 uppercase tracking-widest mb-1">
+                        Signed in as
+                      </p>
+                      <p className="font-bold text-gray-900">
+                        {user.displayName}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="space-y-1">
+                    <Link
+                      to="/"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-50 rounded-xl font-bold transition"
+                    >
+                      Home
+                    </Link>
+                    <Link
+                      to="/about"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-50 rounded-xl font-bold transition"
+                    >
+                      About Us
+                    </Link>
+                    <Link
+                      to="/services"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-50 rounded-xl font-bold transition"
+                    >
+                      Our Services
+                    </Link>
+                    {user && (
+                      <>
+                        <Link
+                          to="/profile"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-50 rounded-xl font-bold transition"
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/rides"
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-3 p-3 text-gray-700 hover:bg-gray-50 rounded-xl font-bold transition"
+                        >
+                          My Rides
+                        </Link>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <div className="p-6 border-t border-gray-100">
+                  {!user ? (
+                    <div className="grid grid-cols-2 gap-3">
+                      <Link
+                        to="/login"
+                        onClick={() => setMobileOpen(false)}
+                        className="bg-gray-900 text-white py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        to="/signup"
+                        onClick={() => setMobileOpen(false)}
+                        className="border-2 border-red-600 text-red-600 py-3 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center"
+                      >
+                        Sign Up
+                      </Link>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setMobileOpen(false);
+                      }}
+                      className="w-full bg-red-600 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg"
+                    >
+                      <LogOut size={16} /> Logout
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );

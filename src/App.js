@@ -12,6 +12,8 @@ import ForgotPassword from "./Component/Pages/ForgotPassword";
 import Profile from "./Component/Pages/Profile";
 import MyRides from "./Component/Pages/MyRides";
 import ProtectedRoute from "./Component/ProtectedRoute";
+import About from "./Component/Pages/About";
+import Services from "./Component/Pages/Services";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/trip" element={<Triptypes />} />
         <Route path="/cabs" element={<Cabtypes />} />
         <Route path="/services" element={<Ourservices />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/ourservices" element={<Services />} />
         <Route
           path="/profile"
           element={

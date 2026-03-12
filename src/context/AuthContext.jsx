@@ -26,7 +26,13 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // Sign up with email and password
-  const signup = async (email, password, displayName, phoneNumber) => {
+  const signup = async (
+    email,
+    password,
+    displayName,
+    phoneNumber,
+    role = "user",
+  ) => {
     try {
       setError(null);
       // Create user account
@@ -49,6 +55,7 @@ export const AuthProvider = ({ children }) => {
         email: email,
         displayName: displayName,
         phoneNumber: phoneNumber,
+        role: role,
         createdAt: new Date(),
         updatedAt: new Date(),
         rideHistory: [],
